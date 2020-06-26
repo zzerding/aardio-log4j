@@ -1,18 +1,18 @@
 # aardio-log4j 是一个基于log4j理念设计的 aardio 的日志管理库
 
->log4j有很多版本我参数的版本是[nodejs-log4j]('https://github.com/log4js-node/log4js-node')
-得益于aardio全局常量 _STUDIO_INVOKED 实现了默认输出IDE调试下为console ,编译后为 file ,默认文件名defaut,日志输出为多线程加了线程锁保证日志输出不会乱.
+>log4j有很多版本我参考的版本是[nodejs-log4j]('https://github.com/log4js-node/log4js-node') 得益于aardio全局常量 _STUDIO_INVOKED 实现了默认输出IDE调试下为console ,编译后为 file ,默认文件名defaut,日志输出为多线程加了线程锁保证日志输出不会乱.默认日志滚动为1m，自动清理15天前的日志。
 
 ##  目录结构
 ````
 ├── log4j
-│   ├── Logger.aardio           日志类
-│   ├── _.aardio                主要函数和变量
-│   ├── appenders               要添加的输出 appender 扩展
-│   ├── appenders.aardio        主要appender
-│   ├── error.aardio            全局error日志
-│   └── laytouts.aardio         日志msg格式化
-- └── log4jTest.aardio            使用示例
+│   ├── Logger.aardio 	       日志类
+│   ├── _.aardio               主要函数和变量
+│   ├── appenders              要添加的输出 appender 扩展
+│   │   ├── _.aardio           主要appends
+│   │   └── fileAppend.a       文件append类
+│   ├── error.aardio           全局error日志ardio
+│   └── laytouts.aardio        日志msg格式化
+└── log4jTest.aardio           使用示例
 ````
 ##  功能列表
 * [x] 日志分类输出
@@ -28,11 +28,10 @@
     - [x] 彩色输出
     - [x] 基本的时间与分类显示
 
-- [ ] 文件输出
-
+- [x] 文件输出
     - [x]  日志文件名自动加上当前日期和.log后缀
-    - [ ]  日志文件滚动输出
-    - [ ]  自定义过期日期，自动清理过期日志
+    - [x]  日志文件滚动输出
+    - [x]  自定义过期日期，自动清理过期日志
 
 
 ## 使用说明
@@ -74,28 +73,27 @@ log4j.configure({
 **/
 
 log4j.configure({
-		appenders = {
-				appenderName =  {  
-					type = 'console'; 
-					fileName = 'fileName.log'; 
-					laytouts = { ['type'] = 'basic'}; 
-				};
-				fileError = {
-					type = 'file'; 
-					fileName = 'file1_error.log'; 
-					laytouts = { ['type'] = 'basic'}; 
-				}
-				fileWarn =  {  
-					type = 'file'; 
-					fileName = 'file12_warn.log'; 
-					laytouts = { ['type'] = 'basic'}; 
-				};
-				
-			};
-			categories = { 
-   	 			fileAndConsole =  { appenders = { 'appenderName';'fileError' }; level="ERROR"};
-   	 			fileWarn =  { appenders = { 'fileWarn' }; level="WARN"}
-    	}
+	appenders = {
+		appenderName =  {  
+			type = 'console'; 
+			fileName = 'fileName.log'; 
+			laytouts = { ['type'] = 'basic'}; 
+		};
+		fileError = {
+			type = 'file'; 
+			fileName = 'file1_error.log'; 
+			laytouts = { ['type'] = 'basic'}; 
+		}
+		fileWarn =  {  
+			type = 'file'; 
+			fileName = 'file12_warn.log'; 
+			laytouts = { ['type'] = 'basic'}; 
+		};
+	};
+	categories = { 
+		fileAndConsole =  { appenders = { 'appenderName';'fileError' }; level="ERROR"};
+		fileWarn =  { appenders = { 'fileWarn' }; level="WARN"}
+	}
 })
 
 ````

@@ -1,8 +1,11 @@
-﻿//appenders 日志输出
+﻿
+namespace log4j.appenders 
+//appenders 日志输出
 import fsys.log
 import thread
 import log4j.laytouts
 import log4j
+import log4j.appenders.fileAppend
 namespace log4j.appenders
 /*
 todo:
@@ -11,23 +14,7 @@ todo:
 	3.新增邮件日志等...
 */
 file = function(loggingEvent,...){
-	var fileName = loggingEvent.fileName
-	fileName = joinFileName(fileName)
-	//..console.log('fileName',fileName)
-	var msg =  ..log4j.laytouts[loggingEvent.laytouts.type](loggingEvent,...)
-	var thrdHandle = ..thread.create(function(msg,fileName){
-		import fsys.log
-		import thread
-		import io
-		thread.lock(fileName,function(){
-			var fsysLog = fsys.log(io.fullpath('/log/'+fileName))
-			fsysLog.print(msg)
-			fsysLog.close()
-			thread.unlock(fileName)
-		})
-	},msg,fileName)
-	..thread.waitAll(thrdHandle)
-	..raw.closehandle(thrdHandle)
+	log4j.appenders.fileAppend.dump(loggingEvent,...)
 
 }
 console = function(loggingEvent,...){
@@ -61,7 +48,7 @@ joinFileName = function(fileName){
 	return string.join(fileNameArr); 
 }
 
-clearLog = function(){}
+
 /**intellisense(log4j.appenders)
 loggingEvent = 输出事件 \n{
 		loggerCategory = this.loggerCategory; /分类
@@ -73,7 +60,7 @@ loggingEvent = 输出事件 \n{
 }
 console(loggingEvent,...) = console输出日志 @loggingEvent 输出事件 @...输出msg
 file(loggingEvent,...) = file输出日志  @loggingEvent 输出事件 @...输出msg
-joinFileName = 拼结文件名为 fileName20060604.log
 end intellisense**/
+
 
 

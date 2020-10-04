@@ -80,6 +80,9 @@ namespace log4j.appenders.fileAppend
 				import io
 				import time
 				var filePath = io.fullpath('/log/')
+				if(filePath ==null){
+					return;
+				}
 				while(true){
 					fsys.enum( filePath, //指定要遍历的目录
 						"*.log", //指定查询文件名,支持windows掩码

@@ -58,6 +58,34 @@ logger.fatal('fatal')
 logger.mark('mark')
 console.pause(true);
 ````
+![snipaste01](./image/Snipaste01.png)
+
+> **每个模块都可以自定义分类**
+````
+import console
+import log4j;
+logger = log4j.getLogger('mainForm.addOrder') //参数为日志分类 
+logger.debug('默认输出格式为[时间] [日志等级] [日志分类]')
+
+//修改默认level等级为全部输出,默认日志等级为 "DEBUG" 
+
+log4j.configure({
+            level = "ALL";
+})
+logger = log4j.getLogger('日志分类ALL') //参数为日志分类
+logger1 = log4j.getLogger('default')
+logger2 = log4j.getLogger('mainForm')
+logger3 = log4j.getLogger('chromeLib')
+logger1.debug("this is default")
+logger.debug("this is all")
+logger2.debug("this is mainForm")
+logger3.debug("this is chrome lib")
+console.pause()
+
+````
+
+![snipter02](./image/Snipaste02.png)
+
 ### 2.关掉默认日志输出 
 ````
 log4j.configure({

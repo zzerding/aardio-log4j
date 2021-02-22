@@ -11,7 +11,7 @@
 │   │   ├── _.aardio           主要appends
 │   │   └── fileAppend.a       文件append类
 │   ├── error.aardio           全局error日志ardio
-│   └── laytouts.aardio        日志msg格式化
+│   └── layouts.aardio        日志msg格式化
 └── log4jTest.aardio           使用示例
 ````
 ##  功能列表
@@ -105,17 +105,17 @@ log4j.configure({
 		appenderName =  {  
 			type = 'console'; 
 			fileName = 'fileName.log'; 
-			laytouts = { ['type'] = 'basic'}; 
+			layouts = { ['type'] = 'basic'}; 
 		};
 		fileError = {
 			type = 'file'; 
 			fileName = 'file1_error.log'; 
-			laytouts = { ['type'] = 'basic'}; 
+			layouts = { ['type'] = 'basic'}; 
 		}
 		fileWarn =  {  
 			type = 'file'; 
 			fileName = 'file12_warn.log'; 
-			laytouts = { ['type'] = 'basic'}; 
+			layouts = { ['type'] = 'basic'}; 
 		};
 	};
 	categories = { 

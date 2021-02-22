@@ -8,7 +8,7 @@ self.configure({
 		error =  { 
 			type ='file';  //日志输出方式
 			fileName = 'error.log'; //日志文件名 如果为空用日期做文件名
-			laytouts = { ['type'] = 'basic'};
+			layouts = { ['type'] = 'basic'};
 		};
 	};
 	categories = {

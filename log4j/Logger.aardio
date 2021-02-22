@@ -25,7 +25,7 @@ namespace log4j
 					level = this.callLevel;
 					type =  appender.type;
 					fileName = appender.fileName;
-					laytouts = appender.laytouts;
+					layouts = appender.layouts;
 					appender = appender
 				}
 			..log4j.appenders[..string.lower(appender.type)](loggingEvent,...)
@@ -35,7 +35,7 @@ namespace log4j
 	getLevelNumber = function(levelStr){
         if(not  this.levels[levelStr]) error(..string.format("没有这个日志级别: %s", levelStr),2)
     	return this.levels[..string.upper(levelStr)].level
-    }
+	};
 	@{
     	_get = function(k){
     		if(type(k) != type.string) return function(){}

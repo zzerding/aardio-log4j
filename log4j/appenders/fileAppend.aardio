@@ -53,7 +53,7 @@ namespace log4j.appenders.fileAppend
 	..thread.set('joinFileName',joinFileName)
 	..thread.set('checkFileSize',checkFileSize)
 	dump =  function (loggingEvent,...){
-		var msg =  ..log4j.laytouts[loggingEvent.laytouts.type](loggingEvent,...)
+		var msg =  ..log4j.layouts[loggingEvent.layouts.type](loggingEvent,...)
 		var thrdHandle = ..thread.create(function(loggingEvent,msg,fileName,maxFileSize){
 			import fsys.log
 			import thread
@@ -112,7 +112,7 @@ loggingEvent = 输出事件 \n{
 		level = this.callLevel; //调用的日志级别
 		type =  appender.type; //日志输出方式
 		fileName = appender.fileName; //文件名
-		laytouts = appender.laytouts; //格式化函数
+		layouts = appender.layouts; //格式化函数
 		appender = appender //其它设置的属性
 }
 log4j.appenders.file.append(loggingEvent,...) = file输出日志  @loggingEvent 输出事件 @...输出msg

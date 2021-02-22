@@ -3,7 +3,7 @@ namespace log4j.appenders
 //appenders 日志输出
 import fsys.log
 import thread
-import log4j.laytouts
+import log4j.layouts
 import log4j
 import log4j.appenders.fileAppend
 namespace log4j.appenders
@@ -18,7 +18,7 @@ file = function(loggingEvent,...){
 
 }
 console = function(loggingEvent,...){
-	var msg = ..log4j.laytouts[loggingEvent.laytouts.type](loggingEvent,...)
+	var msg = ..log4j.layouts[loggingEvent.layouts.type](loggingEvent,...)
 	var color = ..log4j.levels[loggingEvent.level].color
 	var thrdHandle = ..thread.create(function(msg,color){
 		import console
@@ -55,7 +55,7 @@ loggingEvent = 输出事件 \n{
 		level = this.callLevel; //调用的日志级别
 		type =  appender.type; //日志输出方式
 		fileName = appender.fileName; //文件名
-		laytouts = appender.laytouts; //格式化函数
+		layouts = appender.layouts; //格式化函数
 		appender = appender //其它设置的属性
 }
 console(loggingEvent,...) = console输出日志 @loggingEvent 输出事件 @...输出msg

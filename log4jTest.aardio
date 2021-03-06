@@ -69,17 +69,17 @@ log4j.configure({
 				appenderName =  {  
 					type = 'console'; 
 					fileName = 'fileName.log'; 
-					laytouts = { ['type'] = 'basic'}; 
+					layouts = { ['type'] = 'basic'};
 				};
 				fileError = {
 					type = 'file'; 
 					fileName = 'file1_error.log'; 
-					laytouts = { ['type'] = 'basic'}; 
+					layouts = { ['type'] = 'basic'};
 				}
 				fileWarn =  {  
 					type = 'file'; 
 					fileName = 'file12_warn.log'; 
-					laytouts = { ['type'] = 'basic'}; 
+					layouts = { ['type'] = 'basic'};
 				};
 				
 			};

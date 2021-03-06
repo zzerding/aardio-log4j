@@ -1,8 +1,8 @@
-﻿//laytouts 日志格式化
+﻿//layouts 日志格式化
 import util.table;
-namespace log4j.laytouts
+namespace log4j.layouts
 basic = function(loggingEvent,...){
-    var laytouts = loggingEvent.laytouts
+    var layouts = loggingEvent.layouts
     var timeNow = ..time.now()
 	var times = tostring(timeNow) + '.' + tostring(timeNow.milliseconds)
 	var msg = ''
@@ -19,7 +19,7 @@ basic = function(loggingEvent,...){
 	return msg; 
 };
 
-/**intellisense(log4j.laytouts)
+/**intellisense(log4j.layouts)
 
 basic = 设置消息\n@.basic(loggingEvent,...)
 end intellisense**/

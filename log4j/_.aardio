@@ -21,7 +21,7 @@ config = {
 		default =  { 
 			type =logType;  //日志输出方式
 			fileName = 'default'; //日志文件名 如果为空用日期做文件名
-			laytouts = { ['type'] = 'basic'};
+			layouts = { ['type'] = 'basic'};
 		};
 	};
 	categories = {
@@ -74,7 +74,7 @@ config = 日志配置参数 {
 			default =  { 
 				type =logType;  //日志输出方式
 				fileName = 'default'; //日志文件名 如果为空用日期做文件名
-				laytouts = { ['type'] = 'basic'};
+				layouts = { ['type'] = 'basic'};
 			};
 		};
 		categories = { //分类输出
@@ -93,7 +93,7 @@ configure(params)  = 设置log4j默认参数 @params: table {
 					type =logType;  //日志输出方式
 					fileName = 'default'; //日志文件名 如果为空用日期做文件名
 					fileSize = 'null'
-					laytouts = { ['type'] = 'basic'}; //输出格式化
+					layouts = { ['type'] = 'basic'}; //输出格式化
 				};
 				
 			};
@@ -108,7 +108,7 @@ configure() = @.configure({
 				appenderName =  {  
 					type = 'file'; 
 					fileName = 'fileName.log'; 
-					laytouts = { ['type'] = 'basic'}; 
+					layouts = { ['type'] = 'basic'};
 				};
 				
 			};

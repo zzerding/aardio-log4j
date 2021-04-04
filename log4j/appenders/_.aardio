@@ -27,6 +27,8 @@ console = function(loggingEvent,...){
 			console.log('')
 			console.setTextAttribute(color)
 			console.dump(msg)	
+			console.setTextAttribute(0xF)
+			console.log('\n')
 			thread.unlock('console')
 		}
 	)

@@ -2,6 +2,16 @@
 
 >log4j有很多版本我参考的版本是[nodejs-log4j]('https://github.com/log4js-node/log4js-node') 得益于aardio全局常量 _STUDIO_INVOKED 实现了默认输出IDE调试下为console ,编译后为 file ,默认文件名defaut,日志输出为多线程加了线程锁保证日志输出不会乱.默认日志滚动为1m，自动清理15天前的日志。
 
+## 安装方法：
+````
+_IMPORTURL["log4j"] = "https://github.com/zzerding/aardio-log4j/releases/latest/download/log4j.tar.lzma"
+import log4j
+````
+或者
+````
+import ide
+ide.installLib("log4j","https://github.com/zzerding/aardio-log4j/releases/latest/download/log4j.tar.lzma")
+````
 ##  目录结构
 ````
 ├── log4j

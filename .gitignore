@@ -14,7 +14,6 @@
 *.png binary
 *.jpg binary
 /log/
-/dist/
 /.build/
 /node_modules/
 /build/

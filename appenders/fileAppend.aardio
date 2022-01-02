@@ -80,7 +80,7 @@ namespace log4j.appenders.fileAppend
 				import io
 				import time
 				var filePath = io.fullpath('/log/')
-				if(filePath ==null){
+				if(!..io.exist(filePath)){
 					return;
 				}
 				while(true){

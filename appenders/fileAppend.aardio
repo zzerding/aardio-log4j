@@ -1,12 +1,7 @@
 ﻿// file 文件输出
 import thread
 namespace log4j.appenders.fileAppend
-	/*
-	todo:
-		1.日志限制大小滚动输出
-		2.定时清理日志，只保留最近几天内的日志
-		3.新增邮件日志等...
-	*/
+
 	var filePath = ..io.fullpath('/log/')
 	var maxFileSize = 1 * 1024 * 1024
 	joinFileName =function(fileName,maxFileSize){

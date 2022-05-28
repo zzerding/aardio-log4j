@@ -7,13 +7,32 @@ import log4j;
 	4.得益于aardio全局常量 _STUDIO_INVOKED 实现了默认输出IDE调试下为console ,编译后为 file ,默认文件名defaut
 */
 logger = log4j.getLogger('mainForm.addOrder') //参数为日志分类 
+logger1 = log4j.getLogger('test1')
+logger1.defaultLevel = "ERROR"
+
+assertf(logger.getLevelNumber(logger.defaultLevel)==logger.getLevelNumber(logger1.defaultLevel),"设置日志等级失败")
+
+
 logger.debug('默认输出格式为[时间] [日志等级] [日志分类]')
 
+
+var logConfig={
+	 	 level = "DEBUG";  //默认输出日志等级
+    	"type" = "ALL"; /*默认输出日志等级*/
+		appenders = { 
+			console =  {  
+				"type" ='CONSOLE';    				
+				fileName = 'default'; /*日志文件名 如果为空用日期做文件名*/
+				layouts = { ['type'] = 'basic'};  /*格式化选项可以参数log4j.layouts自定义，当前可选为 basic*/
+			};
+		};
+		categories = { /*分类输出,一个日志可以多个输出*/
+   	 		default =  { appenders = { 'console' };} 
+    	}
+}
+
 //修改默认level等级为全部输出
-log4j.configure({
-    		level = "ALL";
-})
-logger = log4j.getLogger('日志分类：ALL') //参数为日志分类比如 
+logger = log4j.getLogger('日志分类：ALL',logConfig) //参数为日志分类比如 
 
 logger.trace('trace')
 logger.debug('debug')
@@ -28,10 +47,8 @@ console.pause(true);
 //修改默认level等级为ERROR
 console.clearScreen()
 console.log('修改默认level等级为ERROR ')
-log4j.configure({
-    		level = "ERROR";
-})
 logger = log4j.getLogger('日志等级为ERROR')
+logger.defaultLevel = "ERROR"
 logger.trace('trace')
 logger.debug('debug')
 logger.info('info')
@@ -44,10 +61,9 @@ console.pause(true);
 //关掉默认日志输出 
 
 
-log4j.configure({
-    	level = 'OFF';
-})
-logger = log4j.getLogger('日志等级为ERROR')
+
+logger = log4j.getLogger('关掉默认日志输出 ')
+logger.defaultLevel = "OFF"
 console.clearScreen()
 console.log('关掉默认日志输出 ')
 
@@ -64,7 +80,8 @@ console.pause()
 	新增一个file输出只记录warn以上日志
 **/
 
-log4j.configure({
+var logConfig={
+		 level = "DEBUG";  //默认输出日志等级
 		appenders = {
 				appenderName =  {  
 					type = 'console'; 
@@ -87,11 +104,11 @@ log4j.configure({
    	 			fileAndConsole =  { appenders = { 'appenderName';'fileError' }; level="ERROR"};
    	 			fileWarn =  { appenders = { 'fileWarn' }; level="WARN"}
     	}
-})
+}
 
 console.clearScreen()
 console.log('新增一个console输出和file输出只记录ERROR以上日志,新增一个file输出只记录warn以上日志 ')
-logger = log4j.getLogger('日志等级为All')
+logger = log4j.getLogger('日志等级为All',logConfig)
 logger.trace('trace')
 logger.debug('debug')
 logger.info('info')

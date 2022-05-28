@@ -1,6 +1,6 @@
 # aardio-log4j 是一个基于log4j理念设计的 aardio 的日志管理库
 
->log4j有很多版本我参考的版本是[nodejs-log4j]('https://github.com/log4js-node/log4js-node') 得益于aardio全局常量 _STUDIO_INVOKED 实现了默认输出IDE调试下为console ,编译后为 file ,默认文件名defaut,日志输出为多线程加了线程锁保证日志输出不会乱.默认日志滚动为1m，自动清理15天前的日志。
+>log4j有很多版本我参考的版本是[nodejs-log4j]('https://github.com/log4js-node/log4js-node') 日志输出为多线程加了线程锁保证日志输出不会乱.默认日志滚动为1m，自动清理15天前的日志。
 
 ## 安装方法：
 ````
@@ -26,7 +26,7 @@ ide.installLib("log4j","https://github.com/zzerding/aardio-log4j/releases/latest
 ````
 ##  功能列表
 * [x] 日志分类输出
-    
+  
 - [x] 日志等级过滤输出
 
 - [x] 可定义多个输出与多个格式化 laytout
@@ -54,11 +54,9 @@ logger.debug('默认输出格式为[时间] [日志等级] [日志分类]')
 
 //修改默认level等级为全部输出,默认日志等级为 "DEBUG" 
 
-log4j.configure({
-            level = "ALL";
-})
-logger = log4j.getLogger('日志分类ALL') //参数为日志分类
 
+logger = log4j.getLogger('日志分类ALL') //参数为日志分类
+logger.defaultLevel = "ALL"
 logger.trace('trace')
 logger.debug('debug')
 logger.info('info')
@@ -78,14 +76,25 @@ logger = log4j.getLogger('mainForm.addOrder') //参数为日志分类
 logger.debug('默认输出格式为[时间] [日志等级] [日志分类]')
 
 //修改默认level等级为全部输出,默认日志等级为 "DEBUG" 
+var logConfig={
+	 	 level = "DEBUG";  //默认输出日志等级
+    	"type" = "ALL"; /*默认输出日志等级*/
+		appenders = { 
+			console =  {  
+				"type" =log4j.logType;    	/*logType 在ide为CONSOLE 打包后为 FILE*/			
+				fileName = 'default'; /*日志文件名 如果为空用日期做文件名*/
+				layouts = { ['type'] = 'basic'};  /*格式化选项可以参数log4j.layouts自定义，当前可选为 basic*/
+			};
+		};
+		categories = { /*分类输出,一个日志可以多个输出*/
+   	 		default =  { appenders = { 'console' };} 
+    	}
+}
 
-log4j.configure({
-            level = "ALL";
-})
-logger = log4j.getLogger('日志分类ALL') //参数为日志分类
-logger1 = log4j.getLogger('default')
-logger2 = log4j.getLogger('mainForm')
-logger3 = log4j.getLogger('chromeLib')
+logger = log4j.getLogger('日志分类ALL',logConfig) //参数为日志分类
+logger1 = log4j.getLogger('default',logConfig)
+logger2 = log4j.getLogger('mainForm',logConfig)
+logger3 = log4j.getLogger('chromeLib',logConfig)
 logger1.debug("this is default")
 logger.debug("this is all")
 logger2.debug("this is mainForm")
@@ -98,9 +107,7 @@ console.pause()
 
 ### 2.关掉默认日志输出 
 ````
-log4j.configure({
-    	level = 'OFF';
-})
+logger.defaultLevel = "OFF"
 ````
 
 ### 3.自定义输出
@@ -110,7 +117,8 @@ log4j.configure({
 	新增一个file输出只记录warn以上日志
 **/
 
-log4j.configure({
+var logConfig={
+    level = "DEBUG";  //默认输出日志等级
 	appenders = {
 		appenderName =  {  
 			type = 'console'; 
@@ -132,8 +140,8 @@ log4j.configure({
 		fileAndConsole =  { appenders = { 'appenderName';'fileError' }; level="ERROR"};
 		fileWarn =  { appenders = { 'fileWarn' }; level="WARN"}
 	}
-})
-
+}
+logger = log4j.getLogger('日志等级为All',logConfig)
 ````
 
 ### 贡献

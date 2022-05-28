@@ -9,9 +9,9 @@ import log4j.appenders.fileAppend
 namespace log4j.appenders
 /*
 todo:
-	1.日志限制大小滚动输出
-	2.定时清理日志，只保留最近几天内的日志
-	3.新增邮件日志等...
+	[x] 日志限制大小滚动输出
+	[x] 定时清理日志，只保留最近几天内的日志
+	[] 新增邮件日志等...
 */
 file = function(loggingEvent,...){
 	log4j.appenders.fileAppend.dump(loggingEvent,...)
